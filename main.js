@@ -51,6 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- お問い合わせフォーム送信（Web3Forms） ---
     const contactForm = document.getElementById('contact-form');
+    
+    // --- 文字数カウンター ---
+    const messageInput = document.getElementById('message');
+    const charCurrent = document.getElementById('char-current');
+    if (messageInput && charCurrent) {
+        messageInput.addEventListener('input', () => {
+            const length = messageInput.value.length;
+            charCurrent.innerText = length;
+            if (length >= 1000) {
+                charCurrent.parentElement.classList.add('over-limit');
+            } else {
+                charCurrent.parentElement.classList.remove('over-limit');
+            }
+        });
+    }
+
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -159,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         mockVideos.forEach(v => {
             const videoHtml = `
-                <a href="https://www.youtube.com/@papakusa_games" target="_blank" rel="noopener noreferrer" class="video-card">
+                <a href="https://www.youtube.com/@ぱぱくさゲームズ" target="_blank" rel="noopener noreferrer" class="video-card">
                     <img src="${v.thumb}" alt="${v.title}" class="video-thumb">
                     <div class="video-info">
                         <h4 class="video-title">${v.title}</h4>
@@ -169,9 +185,97 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             videoContainer.innerHTML += videoHtml;
         });
+
+        // 人気ランキングのモック
+        const popularContainer = document.getElementById('popular-video-container');
+        if (popularContainer) {
+            popularContainer.innerHTML = '';
+            mockVideos.forEach((v, index) => {
+                const rank = index + 1;
+                const videoHtml = `
+                    <a href="https://www.youtube.com/@ぱぱくさゲームズ" target="_blank" rel="noopener noreferrer" class="video-card">
+                        <div class="rank-badge rank-${rank}">${rank}位</div>
+                        <img src="${v.thumb}" alt="${v.title}" class="video-thumb">
+                        <div class="video-info">
+                            <h4 class="video-title">${v.title}</h4>
+                            <div class="video-stats">▶ YouTubeで見る (仮)</div>
+                            <div class="video-stats-details">
+                                <span>👀 1.2万 回</span>
+                                <span>❤️ 800</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                popularContainer.innerHTML += videoHtml;
+            });
+        }
+    }
+
+    // 人気ランキング取得処理（再生数といいね数を取得）
+    async function fetchPopularYouTubeVideos() {
+        const popularContainer = document.getElementById('popular-video-container');
+        if (!popularContainer) return;
+
+        if (YOUR_API_KEY === 'YOUR_API_KEY') {
+            return; // モック関数で処理済み
+        }
+
+        try {
+            // 1. 再生数順(order=viewCount)で動画IDを取得
+            const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUR_API_KEY}&channelId=${CHANNEL_ID}&part=id&order=viewCount&maxResults=3&type=video`;
+            const searchRes = await fetch(searchUrl);
+            if (!searchRes.ok) throw new Error('Search API failed');
+            const searchData = await searchRes.json();
+            
+            const videoIds = searchData.items.map(item => item.id.videoId).join(',');
+            
+            // 2. 取得した動画IDから、詳しい統計情報(statistics)とサムネイル等を取得
+            const statsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${YOUR_API_KEY}&id=${videoIds}&part=snippet,statistics`;
+            const statsRes = await fetch(statsUrl);
+            if (!statsRes.ok) throw new Error('Videos API failed');
+            const statsData = await statsRes.json();
+
+            // 再生数でソート（YouTube APIがたまにソート順を間違えるため念のため）
+            const sortedVideos = statsData.items.sort((a, b) => parseInt(b.statistics.viewCount) - parseInt(a.statistics.viewCount));
+
+            popularContainer.innerHTML = '';
+            
+            sortedVideos.forEach((video, index) => {
+                const rank = index + 1;
+                const videoId = video.id;
+                const title = video.snippet.title;
+                const thumbnailUrl = video.snippet.thumbnails.high.url;
+                
+                // 数字をカンマ区切りにする関数
+                const formatNumber = (num) => new Intl.NumberFormat('ja-JP').format(num);
+                const viewCount = formatNumber(video.statistics.viewCount || 0);
+                const likeCount = formatNumber(video.statistics.likeCount || 0);
+
+                const videoHtml = `
+                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer" class="video-card">
+                        <div class="rank-badge rank-${rank}">${rank}位</div>
+                        <img src="${thumbnailUrl}" alt="${title}" class="video-thumb">
+                        <div class="video-info">
+                            <h4 class="video-title">${title}</h4>
+                            <div class="video-stats">▶ YouTubeで見る</div>
+                            <div class="video-stats-details">
+                                <span>👀 ${viewCount} 回</span>
+                                <span>❤️ ${likeCount}</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                popularContainer.innerHTML += videoHtml;
+            });
+
+        } catch (error) {
+            console.error('Error fetching popular videos:', error);
+            popularContainer.innerHTML = '<p style="text-align:center;">ランキングの読み込みに失敗しました😢<br>後でもう一度試してね！</p>';
+        }
     }
 
     // 動画取得を実行
     fetchYouTubeVideos();
+    fetchPopularYouTubeVideos();
 
 });
