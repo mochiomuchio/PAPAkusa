@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ぱぱくさゲームズ 公式サイト 🍓</title>
+    <meta name="description" content="YouTubeクリエイター「ぱぱくさゲームズ」の公式ホームページ！YouTube動画やRobloxゲーム、Discordコミュニティの情報をチェックしよう！">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Kiwi+Maru:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ローディング画面 -->
+    <div id="loader">
+        <div class="strawberry-loader">🍓</div>
+        <p>よみこみ中...</p>
+    </div>
+
+    <!-- 背景エフェクト -->
+    <div class="bg-effects" id="bg-effects"></div>
+
+    <!-- ナビゲーションバー -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="images/main_icon.png" alt="ぱぱくさゲームズ ロゴ">
+                <span>ぱぱくさゲームズ</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#roblox">Roblox</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#community">Community</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main>
+        <!-- ホームセクション -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">ぱぱくさゲームズへ<br>ようこそ！🍓</h1>
+                <p class="hero-subtitle">たのしいゲーム実況とRobloxの世界！<br>みんなで一緒にあそぼう！</p>
+                <div class="hero-buttons">
+                    <a href="#videos" class="btn btn-primary bounce-hover">▶ 最新動画をみる！</a>
+                    <a href="#community" class="btn btn-secondary bounce-hover">💬 Discordにさんか！</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aboutセクション -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">🍓 About 🍓</h2>
+                <div class="about-content card">
+                    <div class="about-image">
+                        <!-- ユーザー提供の画像をここに使用する想定 -->
+                        <img src="images/main_icon.png" alt="ぱぱくささん アイコン" onerror="this.src='images/logo.png'">
+                    </div>
+                    <div class="about-text">
+                        <h3>ぱぱくさゲームズって？</h3>
+                        <p>「ぱぱくさ」が、ブレインロットを盗むを中心にゲームを楽しく実況しているYouTubeチャンネルだよ！</p>
+                        <p>Robloxをメインに、おもしろいゲームやみんなでワイワイ遊べる企画をたくさん配信中！たまにネタ動画もあるかも…？</p>
+                        <div class="channel-stats">
+                            <a href="https://www.youtube.com/@ぱぱくさゲームズ" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-youtube bounce-hover">
+                                🔴 チャンネル登録してね！
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Videosセクション -->
+        <section id="videos" class="section bg-light-pink">
+            <div class="container">
+                <h2 class="section-title">📺 Videos 📺</h2>
+                <p class="section-desc">最新の動画をチェックしよう！</p>
+
+                <div id="video-container" class="video-grid">
+                    <!-- JSでYouTube APIから取得した動画が入ります -->
+                    <div class="video-loading">
+                        <span class="strawberry-spin">🍓</span> 動画を読み込み中...
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="https://www.youtube.com/@ぱぱくさゲームズ" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-primary bounce-hover">もっと見る！</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Robloxセクション -->
+        <section id="roblox" class="section">
+            <div class="container">
+                <h2 class="section-title">🎮 Roblox 🎮</h2>
+                <div class="roblox-content card">
+                    <div class="roblox-info">
+                        <h3>ぱぱくさのオリジナルゲーム！</h3>
+                        <p>Robloxで遊べるオリジナルのアスレチックやゲームを公開中！<br>フレンドと一緒に挑戦してみてね！</p>
+                        <a href="https://www.roblox.com/ja/games/80431397028360/unnamed" target="_blank"
+                            rel="noopener noreferrer" class="btn btn-roblox bounce-hover">
+                            🟩 あそぶ！（Robloxを開く）
+                        </a>
+                    </div>
+                    <div class="roblox-image">
+                        <img src="images/roblox_ss.png" alt="Roblox ゲーム画面">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsセクション -->
+        <section id="news" class="section bg-light-pink">
+            <div class="container">
+                <h2 class="section-title">📢 News 📢</h2>
+                <div class="news-list card">
+                    <div class="news-item">
+                        <div class="news-date">2026.04.28</div>
+                        <div class="news-text">公式サイトがオープンしました！いちごいっぱいのデザインになったよ！</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2026.03.31</div>
+                        <div class="news-text">新しいRobloxゲームが完成！みんな遊んでみてね！</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Communityセクション -->
+        <section id="community" class="section">
+            <div class="container text-center">
+                <h2 class="section-title">💬 Community 💬</h2>
+                <div class="community-content card">
+                    <h3>ぱぱくさサーバー（Discord）</h3>
+                    <p>一緒にゲームをしたり、雑談したりできる公式サーバーだよ！<br>誰でも参加できるから、ぜひ遊びに来てね！</p>
+                    <div class="discord-invite">
+                        <a href="https://discord.gg/adY8JUhPs4" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-discord bounce-hover">
+                            🟣 いっしょに遊ぼう！（参加する）
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contactセクション -->
+        <section id="contact" class="section bg-light-pink">
+            <div class="container">
+                <h2 class="section-title">✉️ Contact ✉️</h2>
+                <form id="contact-form" class="card contact-form">
+                    <!-- Web3Forms用の設定 -->
+                    <input type="hidden" name="access_key" value="PAPAKUSAGODISBEST">
+                    <input type="hidden" name="subject" value="ぱぱくさゲームズ 公式サイトからのお問い合わせ">
+
+                    <p>お問い合わせやメッセージはこちらからどうぞ！</p>
+                    <div class="form-group">
+                        <label for="name">おなまえ</label>
+                        <input type="text" name="name" id="name" required placeholder="ぱぱくさ太郎">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス（返信用）</label>
+                        <input type="email" name="email" id="email" placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">メッセージ</label>
+                        <textarea name="message" id="message" rows="4" required placeholder="いつも動画見てます！"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary bounce-hover">送信する！</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/main_icon.png" alt="ぱぱくさゲームズ">
+                    <span>ぱぱくさゲームズ</span>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.youtube.com/@papakusa_games" target="_blank" rel="noopener noreferrer"
+                        title="YouTube">📺</a>
+                    <a href="https://discord.gg/adY8JUhPs4" target="_blank" rel="noopener noreferrer"
+                        title="Discord">💬</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 Papakusa Games. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
