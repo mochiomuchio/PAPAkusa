@@ -291,10 +291,32 @@ body {
     text-decoration: none;
     color: var(--text-color);
     display: block;
+    position: relative;
 }
 .video-card:hover {
     transform: translateY(-10px);
 }
+.rank-badge {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+    border: 3px solid white;
+}
+.rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
+.rank-2 { background: linear-gradient(135deg, #C0C0C0, #A9A9A9); }
+.rank-3 { background: linear-gradient(135deg, #CD7F32, #8B4513); }
+
 .video-thumb {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -309,12 +331,23 @@ body {
     margin-bottom: 10px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 .video-stats {
     font-size: 0.9rem;
     color: #888;
+}
+.video-stats-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--primary-red);
+    font-weight: bold;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed var(--sub-pink);
 }
 
 /* Roblox セクション */
@@ -397,7 +430,7 @@ body {
     margin-bottom: 8px;
     font-weight: 700;
 }
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group select {
     width: 100%;
     padding: 12px;
     border: 2px solid var(--sub-pink);
@@ -406,9 +439,52 @@ body {
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s;
+    background-color: white;
 }
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     border-color: var(--primary-red);
+}
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff4d6d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+.file-input {
+    padding: 8px !important;
+    cursor: pointer;
+}
+.char-count {
+    text-align: right;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
+}
+.char-count.over-limit {
+    color: var(--primary-red);
+    font-weight: bold;
+}
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-red);
+    cursor: pointer;
+}
+.checkbox-group label {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    margin-bottom: 0;
 }
 .contact-form button {
     width: 100%;
